@@ -9,7 +9,7 @@ import {UserService} from "./shared/user/user.service";
 })
 export class AppComponent {
   user: User;
-  isLoggingIn = false;
+  isLoggingIn = true;
   constructor(private userService: UserService){
     this.user = new User();
   }
@@ -24,6 +24,17 @@ export class AppComponent {
 
   }
   signUp(){
-    this.userService.register(this.user);
+    this.userService.register(this.user)
+    //subscribing to the http.post observer
+      .subscribe(
+        () => {
+          alert("Your account was successfully created.");
+          this.toggleDisplay();
+        },
+        () => alert("Unfortunately we were unable to create your account.")
+      );
+  }
+  toggleDisplay(){
+    this.isLoggingIn = !this.isLoggingIn;
   }
 }
