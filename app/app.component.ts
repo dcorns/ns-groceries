@@ -12,6 +12,8 @@ export class AppComponent {
   isLoggingIn = true;
   constructor(private userService: UserService){
     this.user = new User();
+    this.user.email = "user@dale.com";
+    this.user.password = "123erd";
   }
   submit(){
     if(this.isLoggingIn){
