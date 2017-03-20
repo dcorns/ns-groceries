@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {User} from "../../shared/user/user";
-import {UserService} from "../../shared/user/user.service"
+import {UserService} from "../../shared/user/user.service";
+import {Router} from "@angular/router";
 @Component({
   selector: "my-app",
   providers: [UserService],
@@ -10,7 +11,7 @@ import {UserService} from "../../shared/user/user.service"
 export class LoginComponent {
   user: User;
   isLoggingIn = true;
-  constructor(private userService: UserService){
+  constructor(private router: Router, private userService: UserService){
     this.user = new User();
     this.user.email = "user@dale.com";
     this.user.password = "123erd";
@@ -23,7 +24,11 @@ export class LoginComponent {
     }
   }
   login(){
-
+    this.userService.login(this.user)
+      .subscribe(
+        () => this.router.navigate(["/list"]),
+        (error) => alert('Unfortunately we could not find your account.')
+      )
   }
   signUp(){
     this.userService.register(this.user)
