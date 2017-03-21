@@ -14,6 +14,7 @@ import {View} from 'ui/core/view';
 export class LoginComponent implements OnInit{
   user: User;
   isLoggingIn = true;
+  //reference the <StackLayout> with the #container attribute in prep for animating it
   @ViewChild('container') container: ElementRef;
   constructor(private router: Router, private userService: UserService, private page: Page){
     this.user = new User();
